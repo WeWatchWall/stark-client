@@ -1,5 +1,4 @@
 const vuePlugin = require('esbuild-vue');
-
 require('esbuild').build({
   entryPoints: ['src/browser.ts'],
   bundle: true,
