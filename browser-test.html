@@ -1,9 +1,22 @@
 <html>
   <head>
-    <script src="./dist/browser.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/typescript-boilerplate-2021"></script> -->
+    
   </head>
   <body>
-    Open the devtools 👇
+    <div id="app">
+      <div>
+        <b-navbar type="dark" variant="primary">
+          <b-navbar-brand href="#">
+            VueJs Typescript Bootstrap
+          </b-navbar-brand>
+        </b-navbar>
+      </div>
+  
+      <div class="p-3">
+        <router-view></router-view>
+      </div>
+  
+    </div>
   </body>
+  <script src="./dist/browser.js"></script>
 </html>

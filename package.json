@@ -14,7 +14,7 @@
   "scripts": {
     "build:dev": "esbuild src/browser.ts --bundle --outfile=dist/browser.js",
     "build:watch": "esbuild src/browser.ts --bundle --watch --outfile=dist/browser.js",
-    "postinstall": "esbuild src/browser.ts --bundle --minify --sourcemap=external --outfile=dist/browser.js"
+    "postinstall": "node build.js"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
@@ -32,6 +32,10 @@
   "dependencies": {
     "bootstrap": "^5.1.0",
     "bootstrap-vue": "^2.21.2",
-    "vue": "^2.6.14"
+    "esbuild-vue": "^0.3.3",
+    "font-awesome": "^4.7.0",
+    "vue": "^2.6.14",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.6.14"
   }
 }
