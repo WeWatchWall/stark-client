@@ -1,8 +1,8 @@
 {
-  "name": "typescript-boilerplate-2021",
-  "version": "0.4.2",
-  "description": "Boilerplate for TypeScript projects (Node.js and browser modules)",
-  "author": "Chris Hager <chris@linuxuser.at>",
+  "name": "stark-client",
+  "version": "0.1.0",
+  "description": "Browser Client for the Stark distributed orchestrator.",
+  "author": "Adrian Burlacu <adrian.burlacu@live.com>",
   "repository": "https://github.com/metachris/typescript-boilerplate",
   "license": "MIT",
   "keywords": [
@@ -44,5 +44,10 @@
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.35",
     "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.0",
+    "bootstrap-vue": "^2.21.2",
+    "vue": "^2.6.14"
   }
 }
