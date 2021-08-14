@@ -6,7 +6,10 @@ require('esbuild').build({
   minify: false,
   sourcemap: true,
   outfile: 'dist/browser.js',
-  plugins: [vuePlugin()],
+  write: true,
+  plugins: [
+    vuePlugin()
+  ],
   define: {
     "process.env.NODE_ENV": JSON.stringify("development"),
   }
