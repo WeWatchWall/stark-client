@@ -1,10 +1,10 @@
 const vuePlugin = require('esbuild-vue');
 require('esbuild').build({
-  entryPoints: ['src/browser.ts'],
+  entryPoints: ['src/index.ts'],
   bundle: true,
   minify: false,
   sourcemap: true,
-  outfile: 'dist/browser.js',
+  outfile: 'dist/index.js',
   write: true,
   plugins: [
     vuePlugin()

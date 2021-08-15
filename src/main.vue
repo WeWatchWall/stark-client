@@ -3,7 +3,7 @@
 </template>
 
 <style>
-  @import './dist/browser.css';
+  @import './dist/index.css';
 </style>
 
 <script lang="ts">
@@ -18,8 +18,7 @@
     },
     methods: {
       load: async function () {
-        debugger;
-        let dyn = 'index.js'
+        let dyn = 'browser_module.js'
         let StaticImport = await import(`./${dyn}`);
         StaticImport.default('test');
       }
