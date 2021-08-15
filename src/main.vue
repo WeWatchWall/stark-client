@@ -1,5 +1,5 @@
 <template>
-    <b-alert show> Hello {{ message }}! </b-alert>
+    <button class="btn btn-primary" v-on:click="load"> Hello {{ message }}! </button>
 </template>
 
 <style>
@@ -15,6 +15,14 @@
       return {
         message: 'Weerld'
       };
+    },
+    methods: {
+      load: async function () {
+        debugger;
+        let dyn = 'index'
+        let StaticImport = await import(`./${dyn}`);
+        StaticImport.default('test');
+      }
     }
   });
 </script>
