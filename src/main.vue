@@ -19,7 +19,7 @@
     methods: {
       load: async function () {
         debugger;
-        let dyn = 'index'
+        let dyn = 'index.js'
         let StaticImport = await import(`./${dyn}`);
         StaticImport.default('test');
       }
