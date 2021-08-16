@@ -60,7 +60,7 @@
         await nodeBootstrapService.init();
 
         let dbServer = config.STARK_DB_HOST;
-        debugger;
+        
         // TODO: Security problem, please make the "trusted services" handle multiple nodes.
         let user = new UserAuth({
           server: undefined,
