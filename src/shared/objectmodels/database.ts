@@ -49,16 +49,9 @@ export class Database {
     // skip_setup: true, auth: { username: "admin", password: "mLHhxiForA1ebt7V1lT1" }
     let address = `http://${this.username}:${this.password}@${this.argValid.dbServer}:5984`;
 
-    await Util.retry(async (retry) => {
-      try {
-        this.state = new PouchDB(`${address}/${this.dbName}`, {
-          skip_setup: true
-        });
-        await Util.delay(3e3);
-      } catch (error) {
-        retry(error);
-      }
-    }, 8);
+    this.state = new PouchDB(`${address}/${this.dbName}`, {
+      skip_setup: true
+    });
 
     this.validateState();
   }

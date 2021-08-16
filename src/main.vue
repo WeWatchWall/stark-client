@@ -19,9 +19,9 @@
       };
     },
     mounted: async () => {
-      let dyn = 'browser_module.js'
-      let StaticImport = await import(`./${dyn}`);
-      StaticImport.default('test');
+      // let dyn = 'browser_module.js'
+      // let StaticImport = await import(`./${dyn}`);
+      // StaticImport.default('test');
 
         /* #region  Declare the schemas. */
         // let userDbSchema = [
@@ -53,6 +53,8 @@
         /* #region  Initializing the environment properties. */
         let nodeBootstrapService = new NodeBootstrap();
         await nodeBootstrapService.init();
+
+        // let dbServer = config.STARK_DB_HOST;
         /* #endregion */
 
         console.log(JSON.stringify(config));

@@ -3,6 +3,7 @@ import { NodeConfig } from "../objectmodels/nodeConfig";
 import { NodeUser } from "../objectmodels/nodeUser";
 import { UserUnauth } from "../objectmodels/userUnauth";
 
+import { Util } from "../../shared/util";
 import { Database } from "../../shared/objectmodels/database";
 
 export class NodeBootstrap {
@@ -38,8 +39,9 @@ export class NodeBootstrap {
 
     this.database = new Database({ arg: { username: this.nodeUser.state.name, dbServer: config.STARK_DB_HOST }, username: config.STARK_NODE_NAME, password: config.STARK_NODE_PASSWORD });
     await this.database.load();
+    await Util.delay(3e3);
     this.database.state.setSchema(this.nodeDbSchema);
-
+    
     this.nodeConfig.db = this.database.state;
     await this.nodeConfig.load();
   }
