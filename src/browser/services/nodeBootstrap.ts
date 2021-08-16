@@ -39,7 +39,7 @@ export class NodeBootstrap {
     this.database = new Database({ arg: { username: this.nodeUser.state.name, dbServer: config.STARK_DB_HOST }, username: config.STARK_NODE_NAME, password: config.STARK_NODE_PASSWORD });
     await this.database.load();
     this.database.state.setSchema(this.nodeDbSchema);
-    debugger;
+
     this.nodeConfig.db = this.database.state;
     await this.nodeConfig.load();
   }

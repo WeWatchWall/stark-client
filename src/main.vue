@@ -55,7 +55,6 @@
         await nodeBootstrapService.init();
         /* #endregion */
 
-        debugger;
         console.log(JSON.stringify(config));
     }
   });
