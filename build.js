@@ -1,4 +1,6 @@
 const vuePlugin = require('esbuild-vue');
+require('browser-env-vars').generate({esm: true});
+
 require('esbuild').build({
   entryPoints: ['src/index.ts'],
   bundle: true,

@@ -1,10 +1,9 @@
 import { ObjectModel } from 'objectmodel';
+import { Buffer } from 'buffer';
 import PouchDB from 'pouchdb-browser';
 import find from 'pouchdb-find';
 import rel from 'relational-pouch';
-import assert from 'assert';
-// import promiseRetry from 'promise-retry'; TODO: Cleanup?
-import nano from 'nano';
+import assert from 'browser-assert';
 import { Util } from "../util";
 
 PouchDB
@@ -49,15 +48,18 @@ export class Database {
     
     // skip_setup: true, auth: { username: "admin", password: "mLHhxiForA1ebt7V1lT1" }
     let address = `http://${this.username}:${this.password}@${this.argValid.dbServer}:5984`;
-    let server = nano(address);
 
     await Util.retry(async (retry) => {
-      return server.db.get(dbName).catch(retry); // Maybe use nano.use??
+      try {
+        this.state = new PouchDB(`${address}/${this.dbName}`, {
+          skip_setup: true
+        });
+        await Util.delay(3e3);
+      } catch (error) {
+        retry(error);
+      }
     }, 8);
 
-    this.state = new PouchDB(`${address}/${this.dbName}`, {
-      skip_setup: true
-    });
     this.validateState();
   }
     
