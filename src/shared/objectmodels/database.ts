@@ -4,7 +4,6 @@ import PouchDB from 'pouchdb-browser';
 import find from 'pouchdb-find';
 import rel from 'relational-pouch';
 import assert from 'browser-assert';
-import { Util } from "../util";
 
 PouchDB
   // .plugin(someadapter)

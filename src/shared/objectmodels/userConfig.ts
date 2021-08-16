@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { ObjectModel, ArrayModel } from "objectmodel";
-import assert from "assert"
+import assert from "browser-assert"
 import validator from "email-validator";
 
 export class UserConfig {
