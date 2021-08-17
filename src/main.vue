@@ -8,13 +8,17 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import config from '../config.js';
+
   import { NodeBootstrap } from './browser/services/nodeBootstrap';
   import { Database } from './shared/objectmodels/database';
   import { UserAuth } from './browser/objectmodels/userAuth';
   import { UserConfig } from './shared/objectmodels/userConfig';
   import { NodeUserLean } from './browser/objectmodels/nodeUserLean';
   import { NodeConfig } from './browser/objectmodels/nodeConfig';
-  import config from '../config.js';
+
+  import { PodManager } from './browser/services/podManager';
+  
 
   export default Vue.extend({
     name: 'Main',
@@ -24,10 +28,6 @@
       };
     },
     mounted: async () => {
-      // let dyn = 'browser_module.js'
-      // let StaticImport = await import(`./${dyn}`);
-      // StaticImport.default('test');
-
         /* #region  Declare the schemas. */
         let userDbSchema = [
           { singular: 'packageConfig', plural: 'packageConfigs' },
@@ -129,7 +129,50 @@
         serviceNodeDb.state.setSchema(serviceDbSchema);
         /* #endregion */
 
-        console.log(JSON.stringify(config));
+        // Can also use DI instead when there are too many dependencies.
+        /* #region  Initializing the users' "trusted" orchestrator services. */
+        let deployManagerService = new PodManager(nodeBootstrapService);
+        await deployManagerService.init();
+
+        // let podConfigService = new PodConfigManager(userDb, userConfig, nodeConfig, nodeDb);
+        // await podConfigService.init();
+
+        // let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
+        // await podNumService.init();
+
+        // let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
+        // await router.init();
+        // /* #endregion */
+
+        // /* #region  Testing the request pipeline, has to set the package.isService = true. */
+        // // TODO: Use in a service
+        // let requestManager = new RequestManager({
+        //   user: nodeServiceUser,
+        //   name: 'stark-core-config',
+        //   podIndex: 0
+        // },
+        // serviceNodeDb);
+        // await requestManager.init();
+        // requestManager.add(async request => {
+        //   return request.arg;
+        // });
+
+        // let requester = new Requester({
+        //   nodeUser: nodeUser,
+        //   serviceUser: nodeServiceUser,
+        //   name: 'stark-core-config',
+        //   services: ['stark-core-config'],
+        //   podIndex: 0
+        // }, nodeDb, nodeConfig, serviceNodeDb);
+        // await requester.init();
+
+        // let result = await requester.add({
+        //   service: 'stark-core-config',
+        //   isRemote: true,  // Also important to test: false,
+        //   arg: 'HELLO WORLD!!!'
+        // });
+        // console.log(`The request was successful. Result: ${result}`);
+        /* #endregion */
     }
   });
 </script>
