@@ -93,7 +93,6 @@ export class Pod {
     if (this.processes.length > this.state.numPods) {
       for (let i = 0; i < this.processes.length - this.state.numPods; i++) {
         let processEnv = this.processes.pop();
-        debugger;
         processEnv = processEnv;
         // TODO: await processEnv.delete();
       }
@@ -138,16 +137,13 @@ export class Pod {
     let attachment = await this.db.rel.getAttachment('podConfig', this.state.id, 'package.zip.pgp');
     let key = config.STARK_USER_KEY;
 
-    debugger;
-    let message = await openpgp.message.read(new Uint8Array(await attachment.arrayBuffer()));
-    debugger;
+    let message = await openpgp.message.read(new Uint8Array(attachment.arrayBuffer()));
     // Decrypt the deployment.
     let { data: decrypted } = await  openpgp.decrypt({
       message: message, // parse encrypted bytes
       passwords: [key],        // decrypt with password
       format: 'binary'                                // output as Uint8Array
     });
-    debugger;
     attachment = decrypted;
     decrypted = undefined;
 
@@ -158,15 +154,11 @@ export class Pod {
     attachment = undefined;
 
     for (let filename of Object.keys(zip.files)) {
-      debugger;
       if (filename !== 'index.js') { continue; }
 
       let fileText = await ((zip.file(filename)).async('string'));
-      debugger;
       let file = new File([fileText], "index.js", { type: "application/javascript" })
-      debugger;
       this.packageFile = URL.createObjectURL(file);
-      debugger;
       break;
     }
     zip = undefined;
