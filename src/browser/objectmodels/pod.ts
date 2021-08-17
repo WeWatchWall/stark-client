@@ -98,14 +98,11 @@ export class Pod {
       }
     } else if (this.state.numPods > this.processes.length) {
       for (let i = 0; i < this.state.numPods - this.processes.length; i++) {
-        let processEnv = new PodEnv({ arg: { name: this.state.name } }, true);
+        let processEnv = new PodEnv({ arg: { name: this.packageFile } }, true);
         this.processes.push(processEnv);
 
         try {
           var self = this;
-          process.on('uncaughtException', async (error) => { // DO SOME ERROR CHECKING SAME POD?
-              await self.saveConfig({status: ProvisionStatus.Error, error: error});
-          });
 
           processEnv.save(this.processes.length - 1);
           await self.saveConfig({ status: ProvisionStatus.Up });

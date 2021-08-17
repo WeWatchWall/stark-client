@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
 // import { Availability } from "./availability"; // TODO
 import { DeploymentMode } from "./deploymentMode";

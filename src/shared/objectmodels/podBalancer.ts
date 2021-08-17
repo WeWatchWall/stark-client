@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import assert from "assert";
+import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
 
 import { DeploymentMode } from './deploymentMode';

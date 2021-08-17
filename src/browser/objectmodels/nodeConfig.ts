@@ -1,4 +1,4 @@
-// import assert from "assert" TODO
+// import assert from "browser-assert" TODO
 import config from '../../../config.js';
 import { EventEmitter } from 'events';
 import { ObjectModel, ArrayModel } from "objectmodel";

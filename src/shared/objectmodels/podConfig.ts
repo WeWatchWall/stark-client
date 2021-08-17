@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import assert from "assert";
+import assert from "browser-assert";
 // import { ObjectModel } from "objectmodel"; // TODO
 import { diff } from 'deep-object-diff';
 

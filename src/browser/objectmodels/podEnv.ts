@@ -36,9 +36,8 @@ export class PodEnv {
     podIndex = podIndex;
     if (!this.state) { await this.load(); } // TODO: USE THIS PATTERN!
     this.validateState();
-
-    let dynamicImport = await import(`./${this.arg.name}`);
-    dynamicImport.default();
+    debugger;
+    await import(`${this.arg.name}`);
   }
 
   toString() {
