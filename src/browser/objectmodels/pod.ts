@@ -137,7 +137,7 @@ export class Pod {
     let attachment = await this.db.rel.getAttachment('podConfig', this.state.id, 'package.zip.pgp');
     let key = config.STARK_USER_KEY;
 
-    let message = await openpgp.message.read(new Uint8Array(attachment.arrayBuffer()));
+    let message = await openpgp.message.read(new Uint8Array(await attachment.arrayBuffer()));
     // Decrypt the deployment.
     let { data: decrypted } = await  openpgp.decrypt({
       message: message, // parse encrypted bytes
