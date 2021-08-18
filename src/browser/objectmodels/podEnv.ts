@@ -36,7 +36,7 @@ export class PodEnv {
     podIndex = podIndex;
     if (!this.state) { await this.load(); } // TODO: USE THIS PATTERN!
     this.validateState();
-    debugger;
+
     let functionInSandbox = await import(`${this.argValid.path}`);
     functionInSandbox.default(`${this.argValid.name}-${podIndex}`);
   }

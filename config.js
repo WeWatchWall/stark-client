@@ -5,5 +5,5 @@ export default {
   "STARK_DB_HOST": "192.168.0.221",
   "STARK_USER_NAME": "admin",
   "STARK_USER_PASSWORD": "dmW8EIdkKnT4hFW0WZhs",
-  "STARK_USER_KEY": "D6rkgy0Ksk"
+  "STARK_USER_KEY": "QGWJfIjIy4"
 }

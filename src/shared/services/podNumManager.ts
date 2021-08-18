@@ -87,11 +87,11 @@ export class PodNumManager {
     this.podBalancers[podName] = undefined;
   }
     
-  private async deleteAll() {
-    let packNames = [...Object.keys(this.podBalancers)]; // Copying an array with the spread operator :)
+  // private async deleteAll() {
+  //   let packNames = [...Object.keys(this.podBalancers)]; // Copying an array with the spread operator :)
 
-    packNames.forEach(packName => {
-      this.delete(packName);
-    });
-  }
+  //   packNames.forEach(packName => {
+  //     this.delete(packName);
+  //   });
+  // }
 }

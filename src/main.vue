@@ -20,10 +20,10 @@
 
   import { PodManager } from './browser/services/podManager';
   import { PodConfigManager } from './shared/services/podConfigManager';
-  import { PodNumManager } from './shared/services/podNumManager';
-  import { Router } from './shared/services/router';
-  import { RequestManager } from './shared/services/requestManager';
-  import { Requester } from './shared/services/requester';
+  // import { PodNumManager } from './shared/services/podNumManager';
+  // import { Router } from './shared/services/router';
+  // import { RequestManager } from './shared/services/requestManager';
+  // import { Requester } from './shared/services/requester';
   
   export default Vue.extend({
     name: 'Main',
@@ -46,13 +46,7 @@
         ];
         let nodeDbSchema = [
           { singular: 'podConfig', plural: 'podConfigs' },
-          {
-            singular: 'userConfig', plural: 'userConfigs',
-            relations: {
-              nodeConfigs: { hasMany: 'nodeConfig' }
-            }
-          },
-          { singular: 'nodeConfig', plural: 'nodeConfigs', relations: { userConfig: { belongsTo: 'userConfig' } } }
+          { singular: 'nodeConfig', plural: 'nodeConfigs' }
         ];
         let serviceDbSchema = [
           { singular: 'request', plural: 'requests' },
@@ -142,42 +136,42 @@
         let podConfigService = new PodConfigManager(userDb, userConfig, nodeConfig, nodeDb);
         await podConfigService.init();
 
-        let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
-        await podNumService.init();
+        // let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
+        // await podNumService.init();
 
-        let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
-        await router.init();
+        // let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
+        // await router.init();
         // /* #endregion */
 
         // /* #region  Testing the request pipeline, has to set the package.isService = true. */
         // // TODO: Use in a service
-        let requestManager = new RequestManager({
-          user: nodeServiceUser,
-          name: 'stark-core-config',
-          podIndex: 0
-        },
-        serviceNodeDb);
-        await requestManager.init();
-        requestManager.add(async request => {
-          return request.arg;
-        });
+        // let requestManager = new RequestManager({
+        //   user: nodeServiceUser,
+        //   name: 'stark-core-config',
+        //   podIndex: 0
+        // },
+        // serviceNodeDb);
+        // await requestManager.init();
+        // requestManager.add(async request => {
+        //   return request.arg;
+        // });
 
-        let requester = new Requester({
-          nodeUser: nodeUser,
-          serviceUser: nodeServiceUser,
-          name: 'stark-core-config',
-          services: ['stark-core-config'],
-          podIndex: 0
-        }, nodeDb, nodeConfig, serviceNodeDb);
-        await requester.init();
+        // let requester = new Requester({
+        //   nodeUser: nodeUser,
+        //   serviceUser: nodeServiceUser,
+        //   name: 'stark-core-config',
+        //   services: ['stark-core-config'],
+        //   podIndex: 0
+        // }, nodeDb, nodeConfig, serviceNodeDb);
+        // await requester.init();
 
-        debugger;
-        let result = await requester.add({
-          service: 'stark-core-config',
-          isRemote: true,  // Also important to test: false,
-          arg: 'HELLO WORLD!!!'
-        });
-        console.log(`The request was successful. Result: ${result}`);
+        // debugger;
+        // let result = await requester.add({
+        //   service: 'stark-core-config',
+        //   isRemote: true,  // Also important to test: false,
+        //   arg: 'HELLO WORLD!!!'
+        // });
+        // console.log(`The request was successful. Result: ${result}`);
         /* #endregion */
     }
   });

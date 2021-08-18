@@ -42,7 +42,7 @@ export class PodConfigTransfer {
   async load() {
     if (this.state) { return; }
     this.validateNew();
-        
+
     this.state = (await this.argValid.userDb.find({
       selector: {
         "_id": {"$regex": "^packageConfig"},
@@ -103,6 +103,7 @@ export class PodConfigTransfer {
         error: 'empty'
       }
     });
+
     await this.db.rel.putAttachment('podConfig', result, 'package.zip.pgp', read.attachment, 'text/plain');
     this.state = result;
 
