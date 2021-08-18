@@ -37,7 +37,8 @@ export class PodEnv {
     if (!this.state) { await this.load(); } // TODO: USE THIS PATTERN!
     this.validateState();
     debugger;
-    await import(`${this.arg.name}`);
+    let functionInSandbox = await import(`${this.argValid.path}`);
+    functionInSandbox.default(`${this.argValid.name}-${podIndex}`);
   }
 
   toString() {
@@ -51,7 +52,8 @@ export class PodEnv {
   }
 
   private newPodEnvModel = ObjectModel({
-    name: String
+    name: String,
+    path: String
   });
 
   private validateNew() {
