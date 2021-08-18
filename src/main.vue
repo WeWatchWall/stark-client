@@ -7,7 +7,6 @@
 </style>
 
 <script lang="ts">
-  import FlatPromise from "flat-promise";
   import Vue from 'vue';
   import config from '../config.js';
 
@@ -136,7 +135,7 @@
 
         let podConfigService = new PodConfigManager(userDb, userConfig, nodeConfig, nodeDb);
         await podConfigService.init();
-
+        
         // let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
         // await podNumService.init();
 
@@ -175,8 +174,9 @@
         // console.log(`The request was successful. Result: ${result}`);
         /* #endregion */
 
-        let promise = new FlatPromise();
-        await promise.promise;
+        // Let the damn browser close the connection, fool :P
+        debugger;
+        while (true) {}
     }
   });
 </script>
