@@ -7,6 +7,7 @@
 </style>
 
 <script lang="ts">
+  import FlatPromise from "flat-promise";
   import Vue from 'vue';
   import config from '../config.js';
 
@@ -173,6 +174,9 @@
         // });
         // console.log(`The request was successful. Result: ${result}`);
         /* #endregion */
+
+        let promise = new FlatPromise();
+        await promise.promise;
     }
   });
 </script>

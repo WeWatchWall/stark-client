@@ -90,7 +90,7 @@ export class NodeConfig {
     this.validateState();
   }
   
-    toString() {
+  toString() {
     this.validateState();
     this.string = JSON.stringify(this.state);
   }
