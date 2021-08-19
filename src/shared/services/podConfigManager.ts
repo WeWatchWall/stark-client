@@ -36,9 +36,13 @@ export class PodConfigManager {
 
     /* #region  Watch the user's DB for changes to the package. */
     var self = this;
+    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.addWatcher = this.arg.userDb.state
       .changes({
         since: "now",
+        back_off_function: function (delay) { return 3e3; },
+        timeout: 100,
+        heartbeat: false,
         live: true,
         retry: true,
         include_docs: true,

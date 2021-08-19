@@ -35,8 +35,12 @@ export class Router {
     /* #region  Initialize the router's Node state and updates. */
     // TODO: filter only status = 1 nodes.
     // TODO: Watch for changes before or after load???
+    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.nodeConfigWatcher = this.arg.userDb.state.changes({
       since: 'now',
+      back_off_function: function (delay) { return 3e3; },
+      timeout: 100,
+      heartbeat: false,
       live: true,
       retry: true,
       include_docs: true,
@@ -69,8 +73,12 @@ export class Router {
 
     /* #region  Initialize the router's PackageConfig state and updates. */
     // TODO: Watch for changes before or after load???
+    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.packConfigWatcher = this.arg.userDb.state.changes({
       since: 'now',
+      back_off_function: function (delay) { return 3e3; },
+      timeout: 100,
+      heartbeat: false,
       live: true,
       retry: true,
       include_docs: true,
@@ -107,8 +115,12 @@ export class Router {
 
     /* #region  Initialize the router's Request state and updates. */
     // TODO: Watch for changes before or after load???
+    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.addRequestWatcher = this.arg.userServiceDb.state.changes({
       since: 'now',
+      back_off_function: function (delay) { return 3e3; },
+      timeout: 100,
+      heartbeat: false,
       live: true,
       retry: true,
       include_docs: true,
@@ -151,8 +163,12 @@ export class Router {
   
     /* #region  Initialize the router's deleted Response state and updates. */
     // TODO: Watch for changes before or after load???
+    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.deleteResponseWatcher = this.arg.userServiceDb.state.changes({
       since: 'now',
+      back_off_function: function (delay) { return 3e3; },
+      timeout: 100,
+      heartbeat: false,
       live: true,
       retry: true,
       include_docs: true,
