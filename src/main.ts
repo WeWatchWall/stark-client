@@ -134,15 +134,14 @@ export const Main = async (): Promise<void> => {
 
   let podConfigService = new PodConfigManager(userDb, userConfig, nodeConfig, nodeDb);
   await podConfigService.init();
-  debugger;
+
   let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
   await podNumService.init();
-  debugger;
+
   let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
   await router.init();
   // /* #endregion */
 
-  
   // /* #region  Testing the request pipeline, has to set the package.isService = true. */
   // // TODO: Use in a service
   let requestManager = new RequestManager({
@@ -159,7 +158,7 @@ export const Main = async (): Promise<void> => {
   let requester = new Requester({
     nodeUser: nodeUser,
     serviceUser: nodeServiceUser,
-    name: 'stark-core-config',
+    name: 'stark-browser-config',
     services: ['stark-core-config'],
     podIndex: 0
   }, nodeDb, nodeConfig, serviceNodeDb);
@@ -169,7 +168,8 @@ export const Main = async (): Promise<void> => {
   let result = await requester.add({
     service: 'stark-core-config',
     isRemote: true,  // Also important to test: false,
-    arg: 'HELLO WORLD!!!'
+    arg: 'HELLO BROWSER WORLD!!!',
+    timeout: 90e3
   });
   console.log(`The request was successful. Result: ${result}`);
   /* #endregion */
