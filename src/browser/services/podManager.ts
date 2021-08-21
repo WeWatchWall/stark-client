@@ -20,8 +20,8 @@ export class PodManager {
     // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.addWatcher = this.nodeBootstrap.database.state.changes({
       since: 'now',
-      back_off_function: function (delay) { return 3e3; },
-      timeout: 100,
+      back_off_function: function (delay) { return 20e3; },
+      timeout: 1,
       heartbeat: false,
       live: true,
       retry: true,

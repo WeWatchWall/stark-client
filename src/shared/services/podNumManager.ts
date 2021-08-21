@@ -33,8 +33,8 @@ export class PodNumManager {
     this.addWatcher = this.arg.nodeDb.state
       .changes({
         since: "now",
-        back_off_function: function (delay) { return 3e3; },
-        timeout: 100,
+        back_off_function: function (delay) { return 20e3; },
+        timeout: 1,
         heartbeat: false,
         live: true,
         retry: true,

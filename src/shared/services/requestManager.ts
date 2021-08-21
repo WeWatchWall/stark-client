@@ -24,8 +24,8 @@ export class RequestManager {
     // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.addWatcher = this.arg.serviceNodeDb.state.changes({
       since: 'now',
-      back_off_function: function (delay) { return 3e3; },
-      timeout: 100,
+      back_off_function: function (delay) { return 5e3; },
+      timeout: 1,
       heartbeat: false,
       live: true,
       retry: true,
