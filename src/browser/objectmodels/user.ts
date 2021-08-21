@@ -1,4 +1,4 @@
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 
 export abstract class User {
   server: any;
@@ -36,9 +36,9 @@ export abstract class User {
   async load() {
     if (this.state) {return;}
     this.state = {
-      name: config.STARK_USER_NAME,
-      password: config.STARK_USER_PASSWORD,
-      key: config.STARK_USER_KEY
+      name: ConfigState.state.STARK_USER_NAME,
+      password: ConfigState.state.STARK_USER_PASSWORD,
+      key: ConfigState.state.STARK_USER_KEY
     }
     
     this.validateState();

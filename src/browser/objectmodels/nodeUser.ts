@@ -4,7 +4,7 @@
 // If it cannot find its configuration in load() first
 // Save config in the Save() function :P Which will use the PUT server/node/nodeid
 
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 import { ObjectModel } from "objectmodel"
 import { v4 as uuidv4 } from 'uuid';
 import generator from 'generate-password-browser';
@@ -56,8 +56,8 @@ export class NodeUser extends User {
     let loaded = false;
     try {
       this.state = {
-          name: config.STARK_NODE_NAME,
-          password: config.STARK_NODE_PASSWORD
+          name: ConfigState.state.STARK_NODE_NAME,
+          password: ConfigState.state.STARK_NODE_PASSWORD
       }
       
       this.validateState();
@@ -73,7 +73,7 @@ export class NodeUser extends User {
   }
 
   async save() {
-    const result = await fetch(`https://${this.server}:${config.STARK_PORT}/nodes/nodeDb`, {
+    const result = await fetch(`https://${this.server}:${ConfigState.state.STARK_PORT}/nodes/nodeDb`, {
       method: 'put',
       body: JSON.stringify({...this.argValid, ...this.nodeConfig}),
       headers: { 'Content-Type': 'application/json' }
@@ -87,10 +87,10 @@ export class NodeUser extends User {
     };
 
     this.validateState();
-    config.STARK_NODE_NAME = this.argValid.name;
-    config.STARK_NODE_PASSWORD = this.argValid.password;
-    config.STARK_SERVICES_NODE_NAME = `services-${this.argValid.name}`;
-    config.STARK_SERVICES_NODE_PASSWORD = this.argValid.password;
+    ConfigState.state.STARK_NODE_NAME = this.argValid.name;
+    ConfigState.state.STARK_NODE_PASSWORD = this.argValid.password;
+    ConfigState.state.STARK_SERVICES_NODE_NAME = `services-${this.argValid.name}`;
+    ConfigState.state.STARK_SERVICES_NODE_PASSWORD = this.argValid.password;
   }
 
   toString() {

@@ -1,4 +1,4 @@
-import config from '../../../config.js';
+import { ConfigState } from '../objectmodels/configState.js';
 import { NodeConfig } from "../objectmodels/nodeConfig";
 import { NodeUser } from "../objectmodels/nodeUser";
 import { UserUnauth } from "../objectmodels/userUnauth";
@@ -26,7 +26,7 @@ export class NodeBootstrap {
     this.user.init();
 
     this.nodeUser = new NodeUser({
-      server: `${config.STARK_HOST}`,
+      server: `${ConfigState.state.STARK_HOST}`,
       nodeConfig: this.nodeConfig.arg,
       arg: {}
     }, true);
@@ -37,7 +37,7 @@ export class NodeBootstrap {
     // this.user.state.key
     await this.user.load();
 
-    this.database = new Database({ arg: { username: this.nodeUser.state.name, dbServer: config.STARK_DB_HOST }, username: config.STARK_NODE_NAME, password: config.STARK_NODE_PASSWORD });
+    this.database = new Database({ arg: { username: this.nodeUser.state.name, dbServer: ConfigState.state.STARK_DB_HOST }, username: ConfigState.state.STARK_NODE_NAME, password: ConfigState.state.STARK_NODE_PASSWORD });
     await this.database.load();
     await Util.delay(3e3);
     this.database.state.setSchema(this.nodeDbSchema);

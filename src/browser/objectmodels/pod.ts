@@ -1,4 +1,4 @@
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 import { EventEmitter } from 'events';
 import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
@@ -141,7 +141,7 @@ export class Pod {
 
   private async saveInstall() { 
     let attachment = await this.db.rel.getAttachment('podConfig', this.state.id, 'package.zip.pgp');
-    let key = config.STARK_USER_KEY;
+    let key = ConfigState.state.STARK_USER_KEY;
 
     let message = await openpgp.message.read(new Uint8Array(await attachment.arrayBuffer()));
     // Decrypt the deployment.

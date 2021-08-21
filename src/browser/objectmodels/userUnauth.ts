@@ -1,4 +1,4 @@
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 import { ObjectModel } from "objectmodel";
 
 import { User } from "./user";
@@ -6,8 +6,8 @@ import { User } from "./user";
 export class UserUnauth extends User {
   init(): void {
     this.arg = {
-      name: config.STARK_USER_NAME,
-            password: config.STARK_USER_PASSWORD
+      name: ConfigState.state.STARK_USER_NAME,
+            password: ConfigState.state.STARK_USER_PASSWORD
     };
     this.validateNew();
   }

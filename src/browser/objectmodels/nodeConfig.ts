@@ -1,5 +1,5 @@
 // import assert from "browser-assert" TODO
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 import { EventEmitter } from 'events';
 import { ObjectModel, ArrayModel } from "objectmodel";
 
@@ -7,6 +7,7 @@ import { ProvisionStatus } from '../../shared/objectmodels/provisionStatus';
 import { DeploymentMode } from '../../shared/objectmodels/deploymentMode'
 import { Availability } from "../../shared/objectmodels/availability";
 import { Security } from "../../shared/objectmodels/security";
+
 
 export class NodeConfig {
   db: any;
@@ -27,8 +28,8 @@ export class NodeConfig {
   }
   
   init(): void { 
-    this.arg.username = config.STARK_USER_NAME;
-    let mode = JSON.parse(config.STARK_MODES);
+    this.arg.username = ConfigState.state.STARK_USER_NAME;
+    let mode = ConfigState.state.STARK_MODES;
     this.arg.mode = mode[0] ? DeploymentMode.Core : DeploymentMode.Edge; // Browser will be hard-coded?;
     this.arg.mode = mode[2] ? DeploymentMode.Browser : this.arg.mode;
 

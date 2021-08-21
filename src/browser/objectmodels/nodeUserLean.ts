@@ -1,4 +1,4 @@
-import config from '../../../config.js';
+import { ConfigState } from './configState.js';
 import { ObjectModel } from "objectmodel"
 
 import { User } from './user';
@@ -17,8 +17,8 @@ export class NodeUserLean extends User {
     
   init(): void {
     this.arg = {
-      name: config.STARK_NODE_NAME,
-      password: config.STARK_NODE_PASSWORD
+      name: ConfigState.state.STARK_NODE_NAME,
+      password: ConfigState.state.STARK_NODE_PASSWORD
     }
 
     super.validateNew();

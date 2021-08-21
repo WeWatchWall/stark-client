@@ -6,8 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import MainComponent from './main.vue';
 
-import config from '../config.js';
-
+import { ConfigState } from './browser/objectmodels/configState';
 import { Database } from './shared/objectmodels/database';
 import { NodeBootstrap } from './browser/services/nodeBootstrap';
 
@@ -22,6 +21,8 @@ import { PodNumManager } from './shared/services/podNumManager';
 import { Router } from './shared/services/router';
 import { RequestManager } from './shared/services/requestManager';
 import { Requester } from './shared/services/requester';
+
+// TODO: Use "vuex": "^3.6.2" for event-states.
 
 export const Main = async (): Promise<void> => {
   Vue.use(BootstrapVue);
@@ -54,10 +55,13 @@ export const Main = async (): Promise<void> => {
   /* #endregion */
 
   /* #region  Initializing the environment properties. */
+  let configState = new ConfigState(true);
+  await configState.init();
+
   let nodeBootstrapService = new NodeBootstrap();
   await nodeBootstrapService.init();
 
-  let dbServer = config.STARK_DB_HOST;
+  let dbServer = ConfigState.state.STARK_DB_HOST;
   
   // TODO: Security problem, please make the "trusted services" handle multiple nodes.
   let user = new UserAuth({
@@ -113,8 +117,8 @@ export const Main = async (): Promise<void> => {
 
   let nodeServiceUser = {
     state: {
-      name: config.STARK_SERVICES_NODE_NAME,
-      password: config.STARK_SERVICES_NODE_PASSWORD
+      name: ConfigState.state.STARK_SERVICES_NODE_NAME,
+      password: ConfigState.state.STARK_SERVICES_NODE_PASSWORD
     }
   };
 
