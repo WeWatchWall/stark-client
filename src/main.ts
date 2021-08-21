@@ -168,7 +168,6 @@ export const Main = async (): Promise<void> => {
   }, nodeDb, nodeConfig, serviceNodeDb);
   await requester.init();
 
-  debugger;
   let result = await requester.add({
     service: 'stark-core-config',
     isRemote: true,  // Also important to test: false,

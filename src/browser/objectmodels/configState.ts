@@ -32,7 +32,6 @@ export class ConfigState {
     let storeObject;
     let maxIndex = -1;
 
-    debugger;
     for (let store of Object.entries(localStorage)) {
       if (isNaN(Number(store[0]))) { continue; }
 
