@@ -212,7 +212,7 @@ export class Router {
     requestDoc.target = this.serviceDbs[target.node].dbName;
     requestDoc.targetPod = target.pod;
     requestDoc.isNew = false;
-    requestDoc.timeRoute = new Date().getTime();
+    requestDoc.timeRoute = Date.now();
 
     // Save request.
     try {

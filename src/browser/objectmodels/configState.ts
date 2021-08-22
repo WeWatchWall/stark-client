@@ -36,7 +36,7 @@ export class ConfigState {
       if (isNaN(Number(store[0]))) { continue; }
 
       storeObject = JSON.parse(store[1]);
-      let time = new Date().getTime();
+      let time = Date.now();
 
       if (storeObject.STARK_USER_KEY !== this.arg.STARK_USER_KEY) {
         this.storeIndex = store[0];
@@ -57,7 +57,7 @@ export class ConfigState {
 
     if (!ConfigState.state) {
       this.storeIndex = `${maxIndex + 1}`;
-      storeObject = { ...{ time: new Date().getTime() }, ...this.argValid };
+      storeObject = { ...{ time: Date.now() }, ...this.argValid };
     }
     
     ConfigState.state = storeObject;
@@ -81,7 +81,7 @@ export class ConfigState {
 
   async save() {
     this.validateState();
-    ConfigState.state.time = new Date().getTime();
+    ConfigState.state.time = Date.now();
     localStorage[this.storeIndex] = JSON.stringify(ConfigState.state);
   }
 
