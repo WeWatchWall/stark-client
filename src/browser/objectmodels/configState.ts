@@ -94,7 +94,7 @@ export class ConfigState {
   }
 
   // :() Constructor type?
-  private newUserModel = ObjectModel({
+  private newConfigModel = ObjectModel({
     STARK_MODES: ArrayModel(Boolean),
     STARK_HOST: String,
     STARK_PORT: String,
@@ -105,7 +105,7 @@ export class ConfigState {
   });
 
   private validateNew() {
-    this.argValid = this.validate ? new this.newUserModel(this.arg) : this.arg;
+    this.argValid = this.validate ? new this.newConfigModel(this.arg) : this.arg;
   }
 
   private validateState() {
