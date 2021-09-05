@@ -73,7 +73,7 @@ export class NodeUser extends User {
   }
 
   async save() {
-    const result = await fetch(`https://${this.server}:${ConfigState.state.STARK_PORT}/nodes/nodeDb`, {
+    const result = await fetch(`http://${this.server}:${ConfigState.state.STARK_PORT}/nodes/nodeDb`, {
       method: 'put',
       body: JSON.stringify({...this.argValid, ...this.nodeConfig}),
       headers: { 'Content-Type': 'application/json' }
