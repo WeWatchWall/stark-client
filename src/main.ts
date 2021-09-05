@@ -13,7 +13,7 @@ export const Main = async (): Promise<void> => {
   Vue.use(IconsPlugin);
 
   new Vue({
-    el: '#app',
+    el: '#stark-app',
     render: h => h(MainComponent),
   });
 

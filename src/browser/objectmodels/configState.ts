@@ -15,7 +15,7 @@ export class ConfigState {
   string: string;
   
   /**
-   * Creates an instance of user.
+   * Creates an instance of the config.
    * @param [arg.db]
    * @param [arg.arg]
    * @param [validate] Is necessary because the arg could be used to load (future).
@@ -69,7 +69,7 @@ export class ConfigState {
   };
   
   /**
-   * Parses user.
+   * Parses the config.
    * @param arg 
    */
   parse(arg: string) {

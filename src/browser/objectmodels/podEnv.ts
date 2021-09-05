@@ -38,7 +38,11 @@ export class PodEnv {
     this.validateState();
 
     let functionInSandbox = await import(`${this.argValid.path}`);
-    functionInSandbox.default(`${this.argValid.name}-${podIndex}`);
+    functionInSandbox.default({
+      package: this.argValid.name,
+      pod: podIndex,
+      arg: this.argValid.arg
+    });
   }
 
   toString() {
@@ -53,7 +57,8 @@ export class PodEnv {
 
   private newPodEnvModel = ObjectModel({
     name: String,
-    path: String
+    path: String,
+    arg: [Object]
   });
 
   private validateNew() {

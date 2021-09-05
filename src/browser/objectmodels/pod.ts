@@ -105,7 +105,8 @@ export class Pod {
         let processEnv = new PodEnv({
           arg: {
             name: this.state.name,
-            path: this.packageFile
+            path: this.packageFile,
+            arg: this.state.arg
           }
         }, true);
         this.processes.push(processEnv);
