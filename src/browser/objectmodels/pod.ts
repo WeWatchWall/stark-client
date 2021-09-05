@@ -106,6 +106,7 @@ export class Pod {
           arg: {
             name: this.state.name,
             path: this.packageFile,
+            sandbox: this.state.sandbox,
             arg: this.state.arg
           }
         }, true);

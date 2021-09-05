@@ -1,8 +1,11 @@
 import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
+import { Sandbox } from "../../shared/objectmodels/sandbox";
 
 // TODO: SCALING UP+DOWN with UPDATE
 export class PodEnv {
+  static starkAppEl;
+  
   db: any;
 
   arg: any;
@@ -16,9 +19,14 @@ export class PodEnv {
   constructor(arg = { arg: undefined},  validate = false) {
     this.arg = arg.arg;
     this.validate = validate;
+    this.init();
   }
 
-  init() { throw new Error("This method is not implemented."); }
+  init() {
+    if (!PodEnv.starkAppEl) {
+      PodEnv.starkAppEl = document.getElementById('stark-pods');
+    }
+  }
 
   parse(arg: string) {
     this.arg = JSON.parse(arg);
@@ -36,6 +44,12 @@ export class PodEnv {
     podIndex = podIndex;
     if (!this.state) { await this.load(); } // TODO: USE THIS PATTERN!
     this.validateState();
+
+    if (this.argValid.sandbox === Sandbox.UI) {
+      let target = document.createElement("DIV");
+      target.setAttribute('id', `${this.argValid.name}-${podIndex}`);
+      PodEnv.starkAppEl.appendChild(target);
+    }
 
     let functionInSandbox = await import(`${this.argValid.path}`);
     functionInSandbox.default({
@@ -58,6 +72,7 @@ export class PodEnv {
   private newPodEnvModel = ObjectModel({
     name: String,
     path: String,
+    sandbox: [Sandbox.Default, Sandbox.Admin, Sandbox.UI],
     arg: [Object]
   });
 
