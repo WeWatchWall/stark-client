@@ -108,7 +108,9 @@ export class ConfigState {
     STARK_DB_HOST: String,
     STARK_USER_NAME: String,
     STARK_USER_PASSWORD: String,
-    STARK_USER_KEY: String    
+    STARK_USER_KEY: String,
+    STARK_SERVICES_NAME: [String],
+    STARK_SERVICES_PASSWORD: [String]
   });
 
   private validateNew() {
