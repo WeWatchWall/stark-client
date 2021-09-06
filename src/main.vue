@@ -1,5 +1,5 @@
 <template>
-    <b-alert show dismissible> {{ message }}! </b-alert>
+    
 </template>
 
 <style>
@@ -21,9 +21,9 @@
   import { PodManager } from './browser/services/podManager';
   import { PodConfigManager } from './shared/services/podConfigManager';
   import { PodNumManager } from './shared/services/podNumManager';
-  import { Router } from './shared/services/router';
-  import { RequestManager } from './shared/services/requestManager';
-  import { Requester } from './shared/services/requester';
+  // import { Router } from './shared/services/router';
+  // import { RequestManager } from './shared/services/requestManager';
+  // import { Requester } from './shared/services/requester';
 
   export default Vue.extend({
     name: 'Main',
@@ -142,41 +142,44 @@
 
       let podNumService = new PodNumManager(userDb, userConfig, nodeDb, nodeConfig);
       await podNumService.init();
-
-      let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
-      await router.init();
       // /* #endregion */
 
       // /* #region  Testing the request pipeline, has to set the package.isService = true. */
       // // TODO: Use in a service
-      let requestManager = new RequestManager({
-        user: nodeServiceUser,
-        name: 'stark-browser-config',
-        podIndex: 0
-      },
-      serviceNodeDb);
-      await requestManager.init();
-      requestManager.add(async request => {
-        return request.arg;
-      });
 
-      let requester = new Requester({
-        nodeUser: nodeUser,
-        serviceUser: nodeServiceUser,
-        name: 'stark-browser-config',
-        services: ['stark-core-config'],
-        podIndex: 0
-      }, nodeDb, nodeConfig, serviceNodeDb);
-      await requester.init();
-
-      let result = await requester.add({
-        service: 'stark-core-config',
-        isRemote: true,  // Also important to test: false,
-        arg: 'HELLO BROWSER WORLD!!!',
-        timeout: 90e3
-      });
+      // HTML Template: <b-alert show dismissible> {{ message }}! </b-alert>
       
-      this.$data.message = result;
+      // let router = new Router(user, dbServer, userDb, userConfig, userServiceDb, nodeConfig);
+      // await router.init();
+
+      // let requestManager = new RequestManager({
+      //   user: nodeServiceUser,
+      //   name: 'stark-browser-config',
+      //   podIndex: 0
+      // },
+      // serviceNodeDb);
+      // await requestManager.init();
+      // requestManager.add(async request => {
+      //   return request.arg;
+      // });
+
+      // let requester = new Requester({
+      //   nodeUser: nodeUser,
+      //   serviceUser: nodeServiceUser,
+      //   name: 'stark-browser-config',
+      //   services: ['stark-core-config'],
+      //   podIndex: 0
+      // }, nodeDb, nodeConfig, serviceNodeDb);
+      // await requester.init();
+
+      // let result = await requester.add({
+      //   service: 'stark-core-config',
+      //   isRemote: true,  // Also important to test: false,
+      //   arg: 'HELLO BROWSER WORLD!!!',
+      //   timeout: 90e3
+      // });
+      
+      // this.$data.message = result;
       /* #endregion */
     }
   });

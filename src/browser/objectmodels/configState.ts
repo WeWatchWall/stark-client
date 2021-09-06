@@ -22,11 +22,19 @@ export class ConfigState {
    */
   constructor(validate = false) {
     this.arg = config;
-    this.arg.STARK_MODES = JSON.parse(this.arg.STARK_MODES);
     this.validate = validate;
   }
 
   async init() {
+    // Loading config from an updated server file.
+    try {
+      let configName = '/config.js'
+      let config = await import(`${configName}`);
+      this.arg = {...this.arg, ...config.default};
+    } catch {
+    }
+    this.arg.STARK_MODES = JSON.parse(this.arg.STARK_MODES);
+
     this.validateNew();
 
     let storeObject;
@@ -44,15 +52,15 @@ export class ConfigState {
         this.storeIndex = undefined;
         continue;
       } else if (!storeObject.time || time - storeObject.time < pollInterval) {
+        maxIndex = Math.max(maxIndex, parseInt(store[0]));
         continue;
-      } else {
-        storeObject.time = time;
-        localStorage[store[0]] = JSON.stringify(storeObject);
-        this.storeIndex = store[0];
-        ConfigState.state = 'init';
       }
-
-      maxIndex = Math.max(maxIndex, parseInt(store[0]));
+      
+      storeObject.time = time;
+      localStorage[store[0]] = JSON.stringify(storeObject);
+      this.storeIndex = store[0];
+      ConfigState.state = 'init';
+      break;
     }
 
     if (!ConfigState.state) {
@@ -63,7 +71,7 @@ export class ConfigState {
     ConfigState.state = storeObject;
     await this.save();
 
-    setTimeout(() => {
+    setInterval(() => {
       this.save(); // Intentionally not awaiting.
     } , pollInterval / 2);
   };
