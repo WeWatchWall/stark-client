@@ -1,6 +1,7 @@
 import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
 import { Sandbox } from "../../shared/objectmodels/sandbox";
+import { ConfigState } from "./configState";
 
 // TODO: SCALING UP+DOWN with UPDATE
 export class PodEnv {
@@ -55,7 +56,8 @@ export class PodEnv {
     functionInSandbox.default({
       package: this.argValid.name,
       pod: podIndex,
-      arg: this.argValid.arg
+      arg: this.argValid.arg,
+      config: ConfigState.state
     });
   }
 
