@@ -45,22 +45,21 @@ export class ConfigState {
 
       storeObject = JSON.parse(store[1]);
       let time = Date.now();
-
+      maxIndex = Math.max(maxIndex, parseInt(store[0]));
+      
       if (storeObject.STARK_USER_KEY !== this.arg.STARK_USER_KEY) {
         this.storeIndex = store[0];
         await this.delete();
         this.storeIndex = undefined;
         continue;
       } else if (!storeObject.time || time - storeObject.time < pollInterval) {
-        maxIndex = Math.max(maxIndex, parseInt(store[0]));
         continue;
+      } else if (!ConfigState.state) {
+        storeObject.time = time;
+        localStorage[store[0]] = JSON.stringify(storeObject);
+        this.storeIndex = store[0];
+        ConfigState.state = 'init';
       }
-      
-      storeObject.time = time;
-      localStorage[store[0]] = JSON.stringify(storeObject);
-      this.storeIndex = store[0];
-      ConfigState.state = 'init';
-      break;
     }
 
     if (!ConfigState.state) {
