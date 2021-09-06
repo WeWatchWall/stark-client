@@ -1,5 +1,5 @@
 <template>
-    <b-alert show> {{ message }}! </b-alert>
+    <b-alert show dismissible> {{ message }}! </b-alert>
 </template>
 
 <style>
