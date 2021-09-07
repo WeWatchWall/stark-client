@@ -162,7 +162,7 @@ export class Pod {
     attachment = undefined;
 
     for (let filename of Object.keys(zip.files)) {
-      if (filename !== 'dist\\index.js') { continue; }
+      if (filename !== 'index.js') { continue; }
 
       let fileText = await ((zip.file(filename)).async('string'));
       let file = new File([fileText], "index.js", { type: "application/javascript" })
