@@ -6,7 +6,7 @@
 The browser side of running the Stark Orchestrator, built with Vue.js. Will listen to the configured CouchDB instance and run any assigned STARK_MODE:DeployMode.Browser packages. The Stark-Server will configure the dist/public folder on:
 
 * Initialization
-* Building with Stark-Server ```bash npm install```
+* Building with Stark-Server ```npm install```
 
 ## Getting Started
 
