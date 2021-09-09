@@ -4,6 +4,9 @@
   "description": "Browser Client for the Stark distributed orchestrator.",
   "author": "Adrian Burlacu <adrian.burlacu@live.com>",
   "repository": "https://github.com/WeWatchWall/stark-client",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "keywords": [
     "drones",
