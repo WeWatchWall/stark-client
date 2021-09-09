@@ -7,8 +7,12 @@
   "private": true,
   "license": "MIT",
   "keywords": [
+    "drones",
+    "iot",
+    "cloud",
+    "javascript",
     "typescript",
-    "esbuild"
+    "browser"
   ],
   "browser": "./browser.js",
   "scripts": {
