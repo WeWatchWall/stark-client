@@ -23,8 +23,8 @@ The Stark-Server project expects the client binaries to exist in $STARK_HOME/dis
 
 2. Copy the deployment files to Stark-Server:
   
-  stark-client/dist -> $STARK_HOME/dist/public/dist
-  stark-client/browser-test.html -> $STARK_HOME/dist/public/index.html
+  * stark-client/dist -> $STARK_HOME/dist/public/dist
+  * stark-client/browser-test.html -> $STARK_HOME/dist/public/index.html
   
 
 The author aknowledges that documentation is not yet anywhere close to complete, so feel free to look at the following files to get an idea of how to use the classes for core and edge packages:
