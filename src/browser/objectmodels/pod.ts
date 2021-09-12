@@ -180,14 +180,13 @@ export class Pod {
     for (let processEnv of this.processes) {
       await processEnv.delete();
     }
+    this.processes = [];
 
     if (isFull) {
       this.eventEmitter.emit('delete', this.state.name);
       URL.revokeObjectURL(this.packageFile);
+      this.state = undefined;
     }
-
-    this.processes = [];
-    this.state = undefined;
   }
 
   private newPodConfigModel = ObjectModel({
