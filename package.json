@@ -20,7 +20,8 @@
   "scripts": {
     "build:dev": "esbuild src/browser.ts --bundle --outfile=dist/browser.js",
     "build:watch": "esbuild src/browser.ts --bundle --watch --outfile=dist/browser.js",
-    "postinstall": "node build.js"
+    "postinstall": "node build.js",
+    "publish": "node ./publish.js" 
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
