@@ -39,12 +39,8 @@ export class Requester {
     /* #region  Initialize the router's Response state and updates. */
     // TODO: Watch for changes before or after load???
     var self = this;
-    // TODO: VM pattern for node(longpoll) vs browser(retry) so I can reuse these dang filed :P
     this.responseWatcher = this.arg.serviceNodeDb.state.changes({
       since: 'now',
-      back_off_function: function (delay) { return 5e3; },
-      timeout: 1,
-      heartbeat: false,
       live: true,
       retry: true,
       include_docs: true,
@@ -171,7 +167,7 @@ export class Requester {
       let request = this.currentRequests[requestId];
       this.currentRequests[requestId] = undefined;
       clearTimeout(request.timeout);
-      request.promise.resolve(responseDoc.data.result);
+      request.promise.resolve(responseDoc.data);
 
       await this.delete({
         id: requestId,
@@ -224,7 +220,6 @@ export class Requester {
   }
 
   private newRequester = ObjectModel({
-    nodeUser: Object,
     serviceUser: Object,
     name: String,
     services: ArrayModel(String),

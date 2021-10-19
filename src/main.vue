@@ -24,6 +24,7 @@
   // import { Router } from './shared/services/router';
   // import { RequestManager } from './shared/services/requestManager';
   // import { Requester } from './shared/services/requester';
+  // import { RequestMode } from './shared/objectmodels/requestMode';
 
   export default Vue.extend({
     name: 'Main',
@@ -172,14 +173,15 @@
       // }, nodeDb, nodeConfig, serviceNodeDb);
       // await requester.init();
 
-      // let result = await requester.add({
+      // let response = await requester.add({
       //   service: 'stark-core-config',
+      //   mode: RequestMode.Single,
       //   isRemote: true,  // Also important to test: false,
       //   arg: 'HELLO BROWSER WORLD!!!',
       //   timeout: 90e3
       // });
       
-      // this.$data.message = result;
+      // this.$data.message = response.result;
       /* #endregion */
     }
   });
